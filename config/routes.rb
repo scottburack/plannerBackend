@@ -3,10 +3,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :create]
+      resources :users
       post "/login", to: "sessions#create"
       post "/signup", to: "users#create"
       get "/current_user", to: "sessions#show"
+      resources :groups
+      resources :events
     end
   end
 
