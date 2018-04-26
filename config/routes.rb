@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get "/current_user", to: "sessions#show"
       resources :groups
       resources :events
+      resources :groups_users
     end
   end
 

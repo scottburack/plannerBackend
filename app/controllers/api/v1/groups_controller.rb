@@ -25,7 +25,7 @@ class Api::V1::GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, :url_link)
+    params.require(:group).permit(:creator_username, :name, :url_link)
   end
 
 end
