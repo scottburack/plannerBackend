@@ -10,12 +10,12 @@ class Api::V1::GroupsController < ApplicationController
 
   def create
     @group = Group.create(group_params)
-    @user = User.find_by(username: params[:group][:creator_username])
+    @user = User.find(params[:group][:user_id])
     GroupsUser.create(group_id: @group.id, user_id: @user.id)
-    @user_groups = GroupsUser.where(user_id: @user.id)
-    @group_ids = @user_groups.map {|ug| ug.group_id}
-    @groups = Group.all.find_all {|group| @group_ids.include?(group.id)}
-    render json: @groups
+    # @user_groups = GroupsUser.where(user_id: @user.id)
+    # @group_ids = @user_groups.map {|ug| ug.group_id}
+    # @groups = Group.all.find_all {|group| @group_ids.include?(group.id)}
+    render json: @user.groups
   end
 
   def show
@@ -33,7 +33,7 @@ class Api::V1::GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:creator_username, :name, :url_link)
+    params.require(:group).permit(:user_id, :name, :url_link)
   end
 
 end

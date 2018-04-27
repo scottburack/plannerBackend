@@ -21,18 +21,15 @@ class Api::V1::GroupsUsersController < ApplicationController
     @groups_user.destroy
   end
 
-  def getUserGroups
-    @user = User.find(id: params[:user_id])
-    @user_groups = GroupsUser.where(user_id: @user.id)
-    @group_ids = @user_groups.map {|ug| ug.group_id}
-    @groups = Group.all.find_all {|group| @group_ids.include?(group.id)}
-    render json: @groups
-  end
+  # def getUserGroups
+  #   @user = User.find(id: params[:user_id])
+  #   render json: @user.groups
+  # end
 
   private
 
   def event_params
-    params.require(:groups_user).permit(:user_id, :group_id, :username)
+    params.require(:groups_user).permit(:user_id, :group_id)
   end
 
 end
