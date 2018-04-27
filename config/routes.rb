@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post "/login", to: "sessions#create"
       post "/signup", to: "users#create"
       get "/current_user", to: "sessions#show"
+      get "/usergroups", to: "groups_users#getUserGroups"
       resources :groups
       resources :events
       resources :groups_users

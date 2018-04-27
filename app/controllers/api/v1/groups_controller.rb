@@ -10,6 +10,12 @@ class Api::V1::GroupsController < ApplicationController
 
   def create
     @group = Group.create(group_params)
+    @user = User.find_by(username: params[:group][:creator_username])
+    GroupsUser.create(group_id: @group.id, user_id: @user.id)
+    @user_groups = GroupsUser.where(user_id: @user.id)
+    @group_ids = @user_groups.map {|ug| ug.group_id}
+    @groups = Group.all.find_all {|group| @group_ids.include?(group.id)}
+    render json: @groups
   end
 
   def show
@@ -21,6 +27,8 @@ class Api::V1::GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @group.destroy
   end
+
+
 
   private
 
