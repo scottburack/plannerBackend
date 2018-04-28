@@ -9,6 +9,8 @@ class Api::V1::EventsController < ApplicationController
 
   def create
     @event = Event.create(event_params)
+    @group = Group.find(params[:event][:group_id])
+    render json: @group.events
   end
 
   def show
@@ -20,6 +22,7 @@ class Api::V1::EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
   end
+
 
   private
 

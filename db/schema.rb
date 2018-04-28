@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427174010) do
+ActiveRecord::Schema.define(version: 20180428185048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20180427174010) do
     t.string "name"
     t.date "date_start"
     t.date "date_end"
-    t.datetime "time_start"
-    t.datetime "time_end"
+    t.time "time_start"
+    t.time "time_end"
     t.integer "votes"
     t.string "img_url"
     t.string "event_url"
