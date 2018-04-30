@@ -23,6 +23,15 @@ class Api::V1::EventsController < ApplicationController
     @event.destroy
   end
 
+  def update
+    # byebug
+    @event = Event.find(params[:id])
+    @event.votes = params[:event][:votes]
+    @event.save
+    # byebug
+    render json: @event
+  end
+
 
   private
 
