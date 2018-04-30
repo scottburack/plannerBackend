@@ -20,7 +20,7 @@ class Api::V1::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    render json: @group
+    render json: @group.users
   end
 
   def destroy
@@ -28,6 +28,10 @@ class Api::V1::GroupsController < ApplicationController
     @group.destroy
   end
 
+  # def get_users
+  #   @group = Group.find(params[:id])
+  #   render json: @group.users
+  # end
 
 
   private

@@ -21,10 +21,6 @@ class Api::V1::GroupsUsersController < ApplicationController
     @groups_user.destroy
   end
 
-  # def getUserGroups
-  #   @user = User.find(id: params[:user_id])
-  #   render json: @user.groups
-  # end
 
   private
 
