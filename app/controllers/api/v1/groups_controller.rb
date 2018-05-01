@@ -20,6 +20,7 @@ class Api::V1::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    byebug
     render json: @group.users
   end
 

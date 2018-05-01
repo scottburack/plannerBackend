@@ -11,6 +11,7 @@ class Api::V1::GroupsUsersController < ApplicationController
     @groups_user = GroupsUser.create(groups_user_params)
     @group = Group.find(params[:groups_user][:group_id])
     @user = User.find(params[:groups_user][:user_id])
+    # byebug
     render json: @group.users
   end
 
