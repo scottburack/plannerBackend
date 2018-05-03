@@ -7,10 +7,13 @@ Rails.application.routes.draw do
       post "/login", to: "sessions#create"
       post "/signup", to: "users#create"
       get "/current_user", to: "sessions#show"
-      # get "/usergroups", to: "groups_users#getUserGroups"
-      # get "/get_users", to: "groups#get_users"
       resources :groups
-      resources :events
+      resources :events do
+        collection do
+          post 'fetch_from_yelp'
+      end
+    end
+
       resources :groups_users
     end
   end
