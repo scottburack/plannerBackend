@@ -1,5 +1,3 @@
-require 'rest-client'
-require 'json'
 
 
 class Api::V1::EventsController < ApplicationController
@@ -22,6 +20,7 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def show
+    byebug
     @event = Event.find(params[:id])
     render json: @event
   end
@@ -45,9 +44,9 @@ class Api::V1::EventsController < ApplicationController
     params[:location_name] == "" ? term = "term=#{params[:radio_value]}" : term = "term=#{params[:location_name]}&#{params[:radio_value]}"
 
     # page = RestClient::Request.execute method: :get, url: BASE_URL + yelp_url + term, Authorization: "Bearer #{KEY}"
-    page = RestClient.get(BASE_URL + yelp_url + term, {Authorization: "Bearer #{KEY}"})
+    page = RestClient.get(BASE_URL + yelp_url + term, {Authorization: "Bearer " + KEY})
     event_hash = JSON.parse(page)
-    byebug
+    puts event_hash
     render json: event_hash
   end
 
