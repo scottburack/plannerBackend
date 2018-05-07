@@ -13,9 +13,10 @@ Rails.application.routes.draw do
           post 'fetch_from_yelp'
       end
     end
-
       resources :groups_users
     end
   end
+
+  mount ActionCable.server => '/cable'
 
 end

@@ -20,7 +20,6 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def show
-    byebug
     @event = Event.find(params[:id])
     render json: @event
   end
