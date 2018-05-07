@@ -13,10 +13,12 @@ Rails.application.routes.draw do
           post 'fetch_from_yelp'
       end
     end
+      resources :group_messages
+      get "/get_messages/:group_id", to: "group_messages#get_messages"
       resources :groups_users
     end
   end
 
-  mount ActionCable.server => '/cable'
+  # mount ActionCable.server => '/cable'
 
 end
