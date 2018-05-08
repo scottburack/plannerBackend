@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       resources :group_messages
       get "/get_messages/:group_id", to: "group_messages#get_messages"
       resources :groups_users
+      resources :conversations do
+        resources :messages
+      end
     end
   end
 

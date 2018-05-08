@@ -7,8 +7,9 @@ class Api::V1::SessionsController < ApplicationController
       token = encode_token({ user_id: @user.id })
       @groups = @user.groups
       @events = @groups.map {|group| group.events}
-      # byebug
-      render json: { user_id: @user.id, username: @user.username, first_name: @user.first_name, last_name: @user.last_name, groups: @groups, events: @events.flatten, jwt: token }, status: 202
+      @conversations = Conversation.where('sender_id = ? or recipient_id = ?', @user.id, @user.id)
+      byebug
+      render json: { user_id: @user.id, username: @user.username, first_name: @user.first_name, last_name: @user.last_name, groups: @groups, events: @events.flatten, conversations: @conversations, jwt: token }, status: 202
     else
       render json: { message: "Invalid username or password" }, status: 401
     end
@@ -19,7 +20,8 @@ class Api::V1::SessionsController < ApplicationController
       token = encode_token({ user_id: current_user.id })
       @groups = current_user.groups
       @events = @groups.map {|group| group.events}
-      render json: { user_id: current_user.id, username: current_user.username, first_name: current_user.first_name, last_name: current_user.last_name, groups: @groups, events: @events.flatten, jwt: token }, status: 200
+      @conversations = Conversation.where('sender_id = ? or recipient_id = ?', @user.id, @user.id)
+      render json: { user_id: current_user.id, username: current_user.username, first_name: current_user.first_name, last_name: current_user.last_name, groups: @groups, events: @events.flatten, conversations: @conversations, jwt: token }, status: 200
     else
       render json: { message: "User not found" }, status: 404
     end
