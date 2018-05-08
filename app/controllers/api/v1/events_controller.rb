@@ -16,7 +16,8 @@ class Api::V1::EventsController < ApplicationController
   def create
     @event = Event.create(event_params)
     @group = Group.find(params[:event][:group_id])
-    render json: @group.events
+    @group.events << @event
+    render json: @event
   end
 
   def show
@@ -49,9 +50,8 @@ class Api::V1::EventsController < ApplicationController
     render json: event_hash
   end
 
-  #(name === "") ? term = `term=${category}` : term = `term=${name}&${category}`
-#let yelpURL;
-#(json.state === "") ?  yelpURL = `location=${json.city}?${json.country}&` : yelpURL = `location=${json.city}?${json.state}?${json.country}&`
+
+
 
   private
 
