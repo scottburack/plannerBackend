@@ -34,6 +34,7 @@ class Api::V1::EventsController < ApplicationController
     # byebug
     @event = Event.find(params[:id])
     @event.votes = params[:event][:votes]
+    @event.journal_entry = params[:event][:journal_entry]
     @event.save
     # byebug
     render json: @event
@@ -57,7 +58,7 @@ class Api::V1::EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:group_id, :name, :date_start, :date_end, :time_start, :time_end, :votes, :img_url, :event_url,
-      :city, :state, :country, :radio_value, :location_name)
+      :city, :state, :country, :radio_value, :location_name, :journal_entry)
   end
 
 end
