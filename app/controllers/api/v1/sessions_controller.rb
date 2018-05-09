@@ -8,7 +8,7 @@ class Api::V1::SessionsController < ApplicationController
       @groups = @user.groups
       @events = @groups.map {|group| group.events}
       @conversations = Conversation.where('sender_id = ? or recipient_id = ?', @user.id, @user.id)
-      byebug
+      # @messages = Messages.where(user_id: @user.id)
       render json: { user_id: @user.id, username: @user.username, first_name: @user.first_name, last_name: @user.last_name, groups: @groups, events: @events.flatten, conversations: @conversations, jwt: token }, status: 202
     else
       render json: { message: "Invalid username or password" }, status: 401
